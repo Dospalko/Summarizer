@@ -3,7 +3,7 @@ import { copy, linkIcon, loader, tick } from "../assets";
 import { useLazyGetSummaryQuery } from "../services/article";
 
 const Demo = () => {
-  // State pro uchování aktuálního článku a seznamu článků
+
   const [article, setArticle] = useState({
     url: "",
     summary: "",
@@ -11,10 +11,9 @@ const Demo = () => {
   const [allArticles, setAllArticles] = useState([]);
   const [copied, setCopied] = useState("");
 
-  // RTK lazy query pro načítání dat z API
   const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery();
 
-  // Načtení dat z localStorage při načtení komponenty
+  
   useEffect(() => {
     const articlesFromLocalStorage = JSON.parse(
       localStorage.getItem("articles")
@@ -25,7 +24,7 @@ const Demo = () => {
     }
   }, []);
 
-  // Odeslání formuláře pro načtení článku
+  //Form HANDLE
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -47,14 +46,13 @@ const Demo = () => {
     }
   };
 
-  // Funkce pro kopírování URL a zobrazení ikony pro zpětnou vazbu
   const handleCopy = (copyUrl) => {
     setCopied(copyUrl);
     navigator.clipboard.writeText(copyUrl);
     setTimeout(() => setCopied(false), 3000);
   };
 
-  // Odeslání formuláře po stisku klávesy Enter
+
   const handleKeyDown = (e) => {
     if (e.keyCode === 13) {
       handleSubmit(e);
